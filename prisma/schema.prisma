@@ -11,11 +11,12 @@ datasource db {
 }
 
 model Item {
-  id        Int       @id @default(autoincrement())
-  name      String    
-  sku       String?   @unique
-  quantity  Int
-  price     Float?
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id          Int       @id @default(autoincrement())
+  name        String    
+  age         Int?
+  dateOfBirth DateTime?
+  score       Float?
+  active      Boolean?
+  description String?
+  joinDate    DateTime?
 }

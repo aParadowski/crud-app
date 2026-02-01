@@ -16,12 +16,28 @@ describe("Items API", () => {
   test('POST create item', async () => {
     const res = await request(app)
       .post('/items')
-      .send({ "name": "Cookies", "quantity": 50 })
+      .send({ "name": "Cookies", "age": 40 })
 
     expect(res.status).toBe(201)
     expect(res.body.name).toBe("Cookies");
     itemId = res.body.id;
   })
+
+  test('Get 1 item by id', async () => {
+    const res = await request(app)
+      .get(`/items/${itemId}`)
+    
+      expect(res.status).toBe(200);
+      expect(res.body.name).toBe("Cookies")
+  })
+
+  test('Get by id should fail when given an id that does not exist', async () => {
+    const res = await request(app)
+      .get(`/items/12321321312`)
+    
+      expect(res.status).toBe(400);
+      expect(res.body.msg).toBeDefined()
+  });
 
   test('GET all items', async () => {
     const res = await request(app)

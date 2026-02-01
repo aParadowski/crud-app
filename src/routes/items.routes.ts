@@ -4,6 +4,7 @@ import * as controller from '../controllers/items.controller';
 const router = Router();
 
 router.get("/", controller.getAll);
+router.get('/:id', controller.getById)
 router.post("/", controller.create);
 router.post("/import", controller.importCsv);
 router.put("/:id", controller.update);

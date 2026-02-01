@@ -6,6 +6,17 @@ export const getAll = async (_: Request, res: Response) => {
   res.json(await service.getAll());
 }
 
+export const getById = async (req: Request, res: Response) => {
+
+  try {
+    const id = validateId(req.params.id);
+    const item = await service.getById(id);
+    res.status(200).json(item);
+  } catch {
+     res.status(400).json({"msg":"No item found"});
+  }
+}
+
 export const create = async (req: Request, res: Response) => {
   res.status(201).json(await service.create(req.body));
 }
