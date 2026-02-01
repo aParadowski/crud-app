@@ -16,10 +16,22 @@ describe("Items API", () => {
   test('POST create item', async () => {
     const res = await request(app)
       .post('/items')
-      .send({ "name": "Cookies", "quantity": 50 })
+      .send({
+        "customerId": "123123123213",
+        "firstName": "Jim",
+        "lastName": "Bo",
+        "company": "Acme",
+        "city": "Denver",
+        "country": "Sweden",
+        "phone1": "2331124412",
+        "phone2": "4421231123",
+        "email": "cool@aol.com",
+        "subscriptionDate": "2020-05-04",
+        "website": "https://checkr.com"
+      })
 
     expect(res.status).toBe(201)
-    expect(res.body.name).toBe("Cookies");
+    expect(res.body.firstName).toBe("Jim");
     itemId = res.body.id;
   })
 
@@ -35,10 +47,10 @@ describe("Items API", () => {
   test('PUT update an item', async () => {
     const res = await request(app)
       .put(`/items/${itemId}`)
-      .send({ "name": "Brown Butter Cookies" })
+      .send({ "company": "Checkr" })
 
     expect(res.status).toBe(200);
-    expect(res.body.name).toBe("Brown Butter Cookies")
+    expect(res.body.company).toBe("Checkr")
   })
 
   test('DELETE remove an item', async () => {
